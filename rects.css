@@ -1,0 +1,6 @@
+.wall-temp {
+    stroke-width: 2;
+    stroke: black;
+    fill: gray;
+    stroke-dasharray: 12 12;
+}
