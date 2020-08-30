@@ -82,39 +82,39 @@ function Maze(blueprint, start, blockings, triggers) {
 blockings = [false, true, true, false];
 
 
-let maze = new Vue({
-    el: '#maze',
-    data: {
-        virtual: null,
-
-        meta: {
-            tilesize: 50,
-            wallshort: 20,
-        },
-        size: {
-            rows: 5,
-            cols: 5,
-        },
-        walls: {
-            vertical: [[]],
-            horizontal: [[]],
-        },
-
-        blockings: [],
-        blockingsOld: [],
-        walltypes: [],
-
-        wallstyle: ['', '', 'wall-temp', 'wall-temp'],
-
-        player: [0, 0],
-        playerX: 0,
-        playerY: 0,
-
-        canInput: true,
-        canMove: true,
-        anim: null,
-        raise: 0,
-        fall: 1,
+Vue.component('maze', {
+    template: '#maze-template',
+    data: function() {
+        return {
+            meta: {
+                tilesize: 50,
+                wallshort: 20,
+            },
+            size: {
+                rows: 5,
+                cols: 5,
+            },
+            walls: {
+                vertical: [[]],
+                horizontal: [[]],
+            },
+    
+            blockings: [],
+            blockingsOld: [],
+            walltypes: [],
+    
+            wallstyle: ['', '', 'wall-temp', 'wall-temp'],
+    
+            player: [0, 0],
+            playerX: 0,
+            playerY: 0,
+    
+            canInput: true,
+            canMove: true,
+            anim: null,
+            raise: 0,
+            fall: 1,
+        };
     },
     computed: {
         width: function() {
@@ -134,6 +134,9 @@ let maze = new Vue({
             return [0, this.raise, this.fall, 1];
         }
     },
+    props: [
+        'virtual',
+    ],
     watch: {
         player: function(newPosition) {
             this.anim.to(this.$data, { playerX: newPosition[0], duration: 1 });
@@ -153,23 +156,30 @@ let maze = new Vue({
             this.anim.to(this.$data, { raise: 1, duration: 1 }, ">");
             this.anim.to(this.$data, { fall: 0, duration: 1 }, "<");
         },
+
+        virtual: function(val) {
+            this.apply(val);
+        },
+    },
+    created: function() {
+        if (this.virtual) {
+            this.apply(this.virtual);
+        }
     },
     methods: {  
-        build: function(blueprint) {
-            this.virtual = new Maze(blueprint, {x: 4, y: 4}, blockings, {});
+        apply: function(val) {
+            this.walls.vertical = val.vertical;
+            this.walls.horizontal = val.horizontal;
 
-            this.walls.vertical = this.virtual.vertical;
-            this.walls.horizontal = this.virtual.horizontal;
+            this.blockings = val.blockings;
+            this.blockingsOld = val.blockings.slice();
+            this.walltypes = val.blockings.map(x => x ? 3 : 0);
 
-            this.blockings = this.virtual.blockings;
-            this.blockingsOld = this.virtual.blockings.slice();
-            this.walltypes = this.virtual.blockings.map(x => x ? 3 : 0);
-
-            this.player = this.virtual.player;
+            this.player = val.player;
             this.playerX = this.player[0];
             this.playerY = this.player[1];
 
-            this.virtual.render = this.render;
+            val.render = this.render;
 
             this.anim = gsap.timeline({ paused: true, onComplete: () => { this.canMove = true; }});
         },
