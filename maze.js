@@ -172,7 +172,7 @@ Vue.component('maze', {
             this.walls.horizontal = val.horizontal;
 
             this.blockings = val.blockings;
-            this.blockingsOld = val.blockings.slice();
+            this.blockingsOld = val.blockings.slice();  
             this.walltypes = val.blockings.map(x => x ? 3 : 0);
 
             this.player = val.player;
