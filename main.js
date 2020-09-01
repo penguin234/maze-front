@@ -20,9 +20,9 @@ let app = new Vue({
                     size: res.size,
                     vertical: res.vertical,
                     horizontal: res.horizontal,
-                },{x: 4, y: 4},
+                },
                 blockings,
-                {});
+                res.triggers);
 
                 this.apply(maze);
             });

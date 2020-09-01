@@ -12,5 +12,13 @@ function LoadLevel(id) {
         });
 }
 
+function LoadStage(id) {
+    return fetch(origin+'stage/'+id.toString()+'/').
+        then((res) => {
+            return res.json();
+        });
+}
+
+
 
 app.setstage(1);

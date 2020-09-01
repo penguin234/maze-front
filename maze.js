@@ -4,10 +4,10 @@ const down = 2;
 const right = 3;
 
 
-function Maze(blueprint, start, blockings, triggers) {
+function Maze(blueprint, blockings, triggers) {
     this.player = [0, 0]
-    this.player[0] = start.x;
-    this.player[1] = start.y;
+    this.player[0] = triggers.start[0];
+    this.player[1] = triggers.start[1];
 
     this.size = blueprint.size;
 
@@ -170,6 +170,8 @@ Vue.component('maze', {
         apply: function(val) {
             this.walls.vertical = val.vertical;
             this.walls.horizontal = val.horizontal;
+
+            this.size = val.size;
 
             this.blockings = val.blockings;
             this.blockingsOld = val.blockings.slice();  

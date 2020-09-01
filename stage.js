@@ -1,10 +1,3 @@
-function LoadStage(id) {
-    return fetch(origin+'stage/'+id.toString()+'/').
-        then((res) => {
-            return res.json();
-        });
-}
-
 Vue.component('stage', {
     template: '#stage-template',
     data: function() {
