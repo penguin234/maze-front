@@ -2,7 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         maze: null,
-        stage_id: 0,
+        stage_id: 1,
         instage: true,
     },
     methods: {
@@ -10,6 +10,7 @@ let app = new Vue({
             this.maze = maze;
         },
         setstage: function(id) {
+            this.instage = true;
             this.stage_id = id;
         },
         setlevel: function(id) {

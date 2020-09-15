@@ -74,6 +74,12 @@
                     <circle :r="meta.tilesize*0.3"
                         :cx="(meta.wallshort+meta.tilesize)*playerX+meta.wallshort+meta.tilesize*0.5"
                         :cy="(meta.wallshort+meta.tilesize)*playerY+meta.wallshort+meta.tilesize*0.5"></circle>
+
+                    <circle :r="meta.tilesize*0.4"
+                        fill="gold"
+                        opacity="0.5"
+                        :cx="(meta.wallshort+meta.tilesize)*end[0]+meta.wallshort+meta.tilesize*0.5"
+                        :cy="(meta.wallshort+meta.tilesize)*end[1]+meta.wallshort+meta.tilesize*0.5"></circle>
                 </svg>
 
                 <div>
@@ -97,14 +103,16 @@
 
         <div id="app">
             <stage v-if="instage" :stage_id="stage_id" v-on:level-selected="setlevel"></stage>
-            <maze v-else :virtual="maze"></maze>
+            <maze v-else :virtual="maze" v-on:stage-cleared="setstage(1)"></maze>
         </div>
 
 
+        <script src="load.js"></script>
+    
         <script src="maze.js"></script>
+
+        <script src="maze-component.js"></script>
         <script src="stage.js"></script>
         <script src="main.js"></script>
-
-        <script src="load.js"></script>
     </body>
 </html>

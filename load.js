@@ -18,7 +18,3 @@ function LoadStage(id) {
             return res.json();
         });
 }
-
-
-
-app.setstage(1);
