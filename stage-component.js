@@ -1,5 +1,5 @@
 Vue.component('stage', {
-    template: '#stage-template',
+    template: stage_component_template,
     data: function() {
         return {
             title: '',

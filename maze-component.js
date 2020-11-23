@@ -1,5 +1,5 @@
 Vue.component('maze', {
-    template: '#maze-template',
+    template: maze_component_template,
     data: function() {
         return {
             meta: {
