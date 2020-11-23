@@ -3,19 +3,19 @@ let app = new Vue({
     data: {
         maze: null,
         stage_id: 1,
-        instage: true,
+        status: 'stage',
     },
     methods: {
         apply: function(maze) {
             this.maze = maze;
         },
         setstage: function(id) {
-            this.instage = true;
+            this.status = 'stage';
             this.stage_id = id;
         },
         setlevel: function(id) {
             LoadLevel(id).then((res) => {
-                this.instage = false;
+                this.status = 'level';
 
                 let maze = new Maze({
                     size: res.size,

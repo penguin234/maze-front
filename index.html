@@ -11,14 +11,16 @@
 
     <body>
         <div id="app">
-            <stage v-if="instage" :stage_id="stage_id" v-on:level-selected="setlevel"></stage>
-            <maze v-else :virtual="maze" v-on:stage-cleared="setstage(1)"></maze>
+            <stage v-if="status=='stage'" :stage_id="stage_id" v-on:level-selected="setlevel"></stage>
+            <maze v-else-if="status=='level'" :virtual="maze" v-on:stage-cleared="setstage(1)"></maze>
         </div>
 
 
         <script src="load.js"></script>
     
         <script src="maze.js"></script>
+
+        <script src="stuffs.js"></script>
 
         <script src="maze-component.template.js"></script>
         <script src="maze-component.js"></script>

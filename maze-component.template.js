@@ -3,7 +3,8 @@ maze_component_template = `
     v-on:keydown.up="move(0)"
     v-on:keydown.left="move(1)"
     v-on:keydown.down="move(2)"
-    v-on:keydown.right="move(3)">
+    v-on:keydown.right="move(3)"
+    v-focus>
 
     <svg :width="400" :height="400" :view-box.camel="viewbox">
         <template v-for="r in (size.rows+1)">
